@@ -141,7 +141,8 @@ export default class Home extends Component<Props> {
               ref={(cam) => {
                 this.camera = cam
               }}
-              aspect={Camera.constants.Aspect.fill}>
+              aspect={Camera.constants.Aspect.fill}
+              style={{height: 500}}>
                 <Text style={styles.captureText}>
                   [CAPTURE_IMAGE]
                 </Text>
