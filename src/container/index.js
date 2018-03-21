@@ -12,10 +12,7 @@ const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducer);
 
 export default class Index extends Component {
-
-  componentDidMount(){
-  }
-
+  
   render() {
     return (
       <View

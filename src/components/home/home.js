@@ -10,7 +10,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Button
+  Button,
+  Animated
 } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -19,7 +20,9 @@ import { styles } from './home.styles';
 
 import { getCards } from '../../actions';
 
-import Camera from 'react-native-camera'
+import CameraAnalysis from '../camera-analysis'
+
+import {Cards} from '../../mocks'
 
 type Props = {
     getCards: Function,
@@ -30,6 +33,10 @@ type Props = {
 export default class Home extends Component<Props> {
   constructor(props: Object){
     super(props)
+
+    this.state = {
+      showCamera: false
+    }
   }
 
 
@@ -99,23 +106,52 @@ export default class Home extends Component<Props> {
   }
 
   yup(){
-    if(!this.refs['swiper']) console.error('no esta!')
-    //this.swipe.swipeRight(true);
     this.refs['swiper'].swipeRight();
   }
 
   nope(){
-    //this.swipe.swipeLeft(true)
     this.refs['swiper'].swipeLeft();
   }
 
+  _renderCamera() {
+    return (
+      <View style={{ flex: 1,flexDirection:'column', alignItems:'center', justifyContent:'flex-end', marginTop: 80, zIndex: 9999, height: 900}}>
+        <CameraAnalysis />
+      </View>
+    )
+  }
+
+  showCamera(){
+    this.setState({showCamera: true})
+  }
+
+  _renderOptions() {
+    return (
+      <View style={{ flex: 1,flexDirection:'row', alignItems:'flex-end', justifyContent:'center', marginTop: 80}}>
+        <TouchableOpacity style={styles.buttons} onPress={this.nope.bind(this)}>
+            <Iconz name='ios-close' size={45} color="#888" style={{}} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttonSmall}>
+            <Iconz name='ios-information' size={25} color="#888" style={{}} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.buttons} onPress={this.yup.bind(this)}>
+            <Iconz name='ios-heart-outline' size={36} color="#888" style={{marginTop:5}} />
+        </TouchableOpacity> 
+        <TouchableOpacity style={styles.buttons} onPress={this.showCamera.bind(this)}>
+            <Iconz name='ios-face' size={36} color="#888" style={{marginTop:5}} />
+        </TouchableOpacity> 
+      </View>
+    )
+  }
+
   render() {
+    const cards = this.props.cards && this.props.cards.length > 0 ? this.props.cards : null;
     return (
         <View style={styles.container}>
-            {/* <View style={{position: 'absolute',height: 500, width: 700, zIndex: 100}}>
-               <Swiper
+            <View style={{position: 'absolute',height: 500, width: 700, zIndex: 100}}>
+              {cards && <Swiper
                 ref={'swiper'}
-                cards={this.props.cards}
+                cards={Cards}
                 renderCard={(cardData) => this.Card(cardData)}
                 onSwipedAll={() => this.noMore()}
                 cardIndex={0}
@@ -123,30 +159,13 @@ export default class Home extends Component<Props> {
                 backgroundColor={'#f7f7f7'}
                 cardStyle={{height: 420}}
                 cardVerticalMargin={10}
-              />
+                stackSize= {3}
+              /> } 
             </View>
-            <View style={{ flex: 1,flexDirection:'row', alignItems:'flex-end', justifyContent:'center', marginTop: 80}}>
-              <TouchableOpacity style={styles.buttons} onPress={this.nope.bind(this)}>
-                  <Iconz name='ios-close' size={45} color="#888" style={{}} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonSmall}>
-                  <Iconz name='ios-information' size={25} color="#888" style={{}} />
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.buttons} onPress={this.yup.bind(this)}>
-                  <Iconz name='ios-heart-outline' size={36} color="#888" style={{marginTop:5}} />
-              </TouchableOpacity> 
-            </View> */}
 
-            <Camera 
-              ref={(cam) => {
-                this.camera = cam
-              }}
-              aspect={Camera.constants.Aspect.fill}
-              style={{height: 500}}>
-                <Text style={styles.captureText}>
-                  [CAPTURE_IMAGE]
-                </Text>
-            </Camera>
+            {this.state.showCamera ? this._renderCamera() : this._renderOptions()}
+            
+
         </View>
         )
     }
