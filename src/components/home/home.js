@@ -112,11 +112,13 @@ export default class Home extends Component<Props> {
   nope(){
     this.refs['swiper'].swipeLeft();
   }
-
+  closeCamera(){
+    this.setState({showCamera: false});
+  }
   _renderCamera() {
     return (
       <View style={{ flex: 1,flexDirection:'column', alignItems:'center', justifyContent:'flex-end', marginTop: 80, zIndex: 9999, height: 900}}>
-        <CameraAnalysis />
+        <CameraAnalysis close={this.closeCamera.bind(this)}/>
       </View>
     )
   }
@@ -138,7 +140,7 @@ export default class Home extends Component<Props> {
             <Iconz name='ios-heart-outline' size={36} color="#888" style={{marginTop:5}} />
         </TouchableOpacity> 
         <TouchableOpacity style={styles.buttons} onPress={this.showCamera.bind(this)}>
-            <Iconz name='ios-face' size={36} color="#888" style={{marginTop:5}} />
+            <Iconz name='ios-happy-outline' size={36} color="#888" style={{marginTop:5}} />
         </TouchableOpacity> 
       </View>
     )
