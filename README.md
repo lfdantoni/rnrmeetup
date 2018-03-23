@@ -17,7 +17,7 @@ You should clone this repository and execute these commands:
 ```sh
 $ cd rnrmeetup
 $ npm install
-$ npm react-native run-ios
+$ react-native run-ios
 ```
 
 If you want contact us, you can!
