@@ -2,7 +2,7 @@
 
 [![react native](https://github.com/lfdantoni/rnrmeetup/raw/master/github_assets/react.png)](https://facebook.github.io/react-native/)       [![redux](https://github.com/lfdantoni/rnrmeetup/raw/master/github_assets/0_U2DmhXYumRyXH6X1.png)](https://redux.js.org/)
 
-Hey guy! That project was used as example for explaining these two big topics at meetup. We hope this can help you!
+Hey guy! That project was used as example for explaining these two big topics at [meetup](https://www.meetup.com/Digital-Innovation-fwd/events/248057807/). We hope this can help you!
 
 Here there are some resources, but you should find more :)
 
