@@ -23,6 +23,7 @@ $ npm react-native run-ios
 If you want contact us, you can!
 
 Leonardo: lfdantoni@gmail.com
+
 Fernando: fpmirabile@gmail.com
 
 Thank you for all!
